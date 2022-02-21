@@ -27,7 +27,7 @@ class StandardButton extends StatelessWidget {
         text,
         style: TextStyle(color: textColor ?? Colors.white),
       ),
-      backgroundColor: color ?? AppColors.primaryColor,
+      backgroundColor: color ?? AppColors.secondaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radius ?? 10),
       ),
