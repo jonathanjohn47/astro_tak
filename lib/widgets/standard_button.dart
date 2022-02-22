@@ -7,6 +7,7 @@ class StandardButton extends StatelessWidget {
   final Color? color;
   final Color? textColor;
   final double? radius;
+  final double? elevation;
 
   const StandardButton(
       {Key? key,
@@ -14,7 +15,8 @@ class StandardButton extends StatelessWidget {
       required this.onPressed,
       this.color,
       this.textColor,
-      this.radius})
+      this.radius,
+      this.elevation})
       : super(key: key);
 
   @override
@@ -29,9 +31,9 @@ class StandardButton extends StatelessWidget {
       ),
       backgroundColor: color ?? AppColors.secondaryColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radius ?? 10),
+        borderRadius: BorderRadius.circular(radius ?? 6),
       ),
-      elevation: 2,
+      elevation: elevation ?? 2,
     );
   }
 }

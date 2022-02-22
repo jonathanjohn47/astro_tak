@@ -1,4 +1,5 @@
 import 'package:astro_tak/core/app_colors.dart';
+import 'package:astro_tak/features/home/getxcontrollers/home_page_get_controller.dart';
 import 'package:astro_tak/features/home/ui/fragments/my_profile.dart';
 import 'package:astro_tak/features/home/ui/fragments/order_history.dart';
 import 'package:astro_tak/widgets/alt_button.dart';
@@ -12,12 +13,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomePageGetController homePageGetController =
+        Get.put<HomePageGetController>(
+      HomePageGetController(),
+    );
     return DefaultTabController(
         length: 2,
         child: SafeArea(
           child: Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(kTextTabBarHeight),
+              preferredSize: Size.fromHeight(Get.height * 0.2),
               child: StandardAppBar(
                 leading: StandardIconButton(
                   icon: Icons.arrow_back_ios,
