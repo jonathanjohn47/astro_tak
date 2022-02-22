@@ -4,7 +4,7 @@ import 'package:astro_tak/features/home/ui/fragments/my_profile.dart';
 import 'package:astro_tak/features/home/ui/fragments/order_history.dart';
 import 'package:astro_tak/widgets/alt_button.dart';
 import 'package:astro_tak/widgets/standard_app_bar.dart';
-import 'package:astro_tak/widgets/standard_icon.dart';
+import 'package:astro_tak/widgets/standard_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

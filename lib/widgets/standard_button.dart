@@ -1,4 +1,5 @@
 import 'package:astro_tak/core/app_colors.dart';
+import 'package:astro_tak/core/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class StandardButton extends StatelessWidget {
@@ -31,7 +32,8 @@ class StandardButton extends StatelessWidget {
       ),
       backgroundColor: color ?? AppColors.secondaryColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radius ?? 6),
+        borderRadius:
+            BorderRadius.circular(radius ?? AppConstants.borderRadius),
       ),
       elevation: elevation ?? 2,
     );

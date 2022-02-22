@@ -1,4 +1,5 @@
 import 'package:astro_tak/core/app_colors.dart';
+import 'package:astro_tak/core/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class AltButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class AltButton extends StatelessWidget {
             color: AppColors.secondaryColor,
             width: 2,
           ),
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(AppConstants.borderRadius),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),

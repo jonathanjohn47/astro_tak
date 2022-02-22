@@ -1,3 +1,4 @@
+import 'package:astro_tak/core/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class TextEntryField extends StatelessWidget {
@@ -32,6 +33,9 @@ class TextEntryField extends StatelessWidget {
         labelText: labelText,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppConstants.borderRadius),
+        ),
       ),
       validator: (value) {
         if (validator != null) {

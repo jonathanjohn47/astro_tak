@@ -15,7 +15,11 @@ class StandardAppBar extends StatelessWidget {
         ListTile(
           leading: leading,
           title: Center(child: Text('Astro Tak')),
-          trailing: trailing,
+          trailing: trailing ??
+              SizedBox(
+                height: 16,
+                width: 16,
+              ),
         ),
         bottom ??
             SizedBox(

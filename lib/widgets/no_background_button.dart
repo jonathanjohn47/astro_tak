@@ -1,3 +1,4 @@
+import 'package:astro_tak/core/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class NoBackgroundButton extends StatelessWidget {
@@ -23,7 +24,7 @@ class NoBackgroundButton extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(AppConstants.borderRadius),
               color: backgroundColor ?? Colors.transparent),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
