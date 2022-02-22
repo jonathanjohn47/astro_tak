@@ -19,11 +19,11 @@ class StandardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return FloatingActionButton.extended(
       onPressed: () {
         onPressed();
       },
-      child: Text(
+      label: Text(
         text,
         style: TextStyle(color: textColor ?? Colors.white),
       ),
