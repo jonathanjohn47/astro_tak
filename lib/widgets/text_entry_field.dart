@@ -10,6 +10,7 @@ class TextEntryField extends StatelessWidget {
   final Widget? suffixIcon;
   final Function(String)? validator;
   final String? validatorText;
+  final Function(String)? onChanged;
 
   const TextEntryField(
       {Key? key,
@@ -20,7 +21,8 @@ class TextEntryField extends StatelessWidget {
       this.prefixIcon,
       this.suffixIcon,
       this.validator,
-      this.validatorText})
+      this.validatorText,
+      this.onChanged})
       : super(key: key);
 
   @override
@@ -42,6 +44,11 @@ class TextEntryField extends StatelessWidget {
           return validator!(value!);
         }
         return null;
+      },
+      onChanged: (value) {
+        if (onChanged != null) {
+          onChanged!(value);
+        }
       },
     );
   }
