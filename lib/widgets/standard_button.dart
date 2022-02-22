@@ -9,6 +9,7 @@ class StandardButton extends StatelessWidget {
   final Color? textColor;
   final double? radius;
   final double? elevation;
+  final IconData? icon;
 
   const StandardButton(
       {Key? key,
@@ -17,7 +18,8 @@ class StandardButton extends StatelessWidget {
       this.color,
       this.textColor,
       this.radius,
-      this.elevation})
+      this.elevation,
+      this.icon})
       : super(key: key);
 
   @override
@@ -26,6 +28,12 @@ class StandardButton extends StatelessWidget {
       onPressed: () {
         onPressed();
       },
+      icon: icon != null
+          ? Icon(
+              icon,
+              color: textColor ?? Colors.white,
+            )
+          : null,
       label: Text(
         text,
         style: TextStyle(color: textColor ?? Colors.white),

@@ -5,8 +5,15 @@ import 'package:flutter/material.dart';
 class AltButton extends StatelessWidget {
   final String text;
   final Function() onPressed;
+  final Color? color;
+  final Color? backGroundColor;
 
-  const AltButton({Key? key, required this.text, required this.onPressed})
+  const AltButton(
+      {Key? key,
+      required this.text,
+      required this.onPressed,
+      this.color,
+      this.backGroundColor})
       : super(key: key);
 
   @override
@@ -18,9 +25,10 @@ class AltButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.secondaryColor,
+            color: color ?? AppColors.secondaryColor,
             width: 2,
           ),
+          color: backGroundColor ?? Colors.transparent,
           borderRadius: BorderRadius.circular(AppConstants.borderRadius),
         ),
         child: Padding(
@@ -28,7 +36,7 @@ class AltButton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              color: AppColors.secondaryColor,
+              color: color ?? AppColors.secondaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),

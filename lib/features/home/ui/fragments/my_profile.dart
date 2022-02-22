@@ -25,8 +25,7 @@ class MyProfile extends StatelessWidget {
                   return NoBackgroundButton(
                     text: 'Basic Profile',
                     onPressed: () {
-                      homePageGetController.basicProfileSelected.value =
-                          !homePageGetController.basicProfileSelected.value;
+                      homePageGetController.basicProfileSelected.value = true;
                     },
                     backgroundColor:
                         homePageGetController.basicProfileSelected.value
@@ -41,8 +40,7 @@ class MyProfile extends StatelessWidget {
                   return NoBackgroundButton(
                     text: 'Friends and Family Profile',
                     onPressed: () {
-                      homePageGetController.basicProfileSelected.value =
-                          !homePageGetController.basicProfileSelected.value;
+                      homePageGetController.basicProfileSelected.value = false;
                     },
                     backgroundColor:
                         !homePageGetController.basicProfileSelected.value
