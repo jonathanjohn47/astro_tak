@@ -25,6 +25,7 @@ class StandardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
+      isExtended: true,
       onPressed: () {
         onPressed();
       },

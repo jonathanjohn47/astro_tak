@@ -342,12 +342,12 @@ class FriendsAndFamily extends StatelessWidget {
                                                   controller:
                                                       friendsAndFamilyGetController
                                                           .hourController,
-                                                  labelText: 'Minute',
+                                                  labelText: 'Hour',
                                                   keyboardType:
                                                       TextInputType.number,
                                                   validator: (value) {
                                                     if (value.isEmpty) {
-                                                      return 'Please enter a minute';
+                                                      return 'Please enter hour';
                                                     }
                                                     return null;
                                                   },
@@ -396,12 +396,12 @@ class FriendsAndFamily extends StatelessWidget {
                                                   controller:
                                                       friendsAndFamilyGetController
                                                           .minuteController,
-                                                  labelText: 'Second',
+                                                  labelText: 'Minute',
                                                   keyboardType:
                                                       TextInputType.number,
                                                   validator: (value) {
                                                     if (value.isEmpty) {
-                                                      return 'Please enter a second';
+                                                      return 'Please enter Minute';
                                                     }
                                                     return null;
                                                   },
@@ -460,25 +460,118 @@ class FriendsAndFamily extends StatelessWidget {
                                     SizedBox(
                                       height: Get.height * 0.02,
                                     ),
+
                                     Row(
                                       children: [
-                                        //dropdown
-                                        DropdownButton<String>(
-                                            value: friendsAndFamilyGetController
-                                                .selectedGender.value,
-                                            items: friendsAndFamilyGetController
-                                                .genderList
-                                                .map((element) =>
-                                                    DropdownMenuItem<String>(
-                                                        value: element,
-                                                        child: Text(element)))
-                                                .toList(),
-                                            onChanged: (value) {
-                                              friendsAndFamilyGetController
-                                                  .selectedGender
-                                                  .value = value!;
-                                            }),
+                                        //genderList
+                                        Expanded(
+                                          child: Wrap(
+                                            direction: Axis.vertical,
+                                            children: [
+                                              Text('Gender'),
+                                              Container(
+                                                width: Get.width * 0.45,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          AppConstants
+                                                              .borderRadius),
+                                                  border: Border.all(
+                                                      color: Colors.grey),
+                                                ),
+                                                child: DropdownButton<String>(
+                                                    underline: Container(),
+                                                    isExpanded: true,
+                                                    value:
+                                                        friendsAndFamilyGetController
+                                                            .selectedGender
+                                                            .value,
+                                                    items:
+                                                        friendsAndFamilyGetController
+                                                            .genderList
+                                                            .map((element) =>
+                                                                DropdownMenuItem<
+                                                                        String>(
+                                                                    value:
+                                                                        element,
+                                                                    child:
+                                                                        Padding(
+                                                                      padding:
+                                                                          const EdgeInsets.all(
+                                                                              8.0),
+                                                                      child: Text(
+                                                                          element),
+                                                                    )))
+                                                            .toList(),
+                                                    onChanged: (value) {
+                                                      friendsAndFamilyGetController
+                                                          .selectedGender
+                                                          .value = value!;
+                                                    }),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: Get.width * 0.02,
+                                        ),
+                                        //relationList
+                                        Expanded(
+                                          child: Wrap(
+                                            direction: Axis.vertical,
+                                            children: [
+                                              Text('Relation'),
+                                              Container(
+                                                width: Get.width * 0.45,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          AppConstants
+                                                              .borderRadius),
+                                                  border: Border.all(
+                                                      color: Colors.grey),
+                                                ),
+                                                child: DropdownButton<String>(
+                                                    underline: Container(),
+                                                    isExpanded: true,
+                                                    value:
+                                                        friendsAndFamilyGetController
+                                                            .selectedRelation
+                                                            .value,
+                                                    items:
+                                                        friendsAndFamilyGetController
+                                                            .relationList
+                                                            .map((element) =>
+                                                                DropdownMenuItem<
+                                                                        String>(
+                                                                    value:
+                                                                        element,
+                                                                    child:
+                                                                        Padding(
+                                                                      padding:
+                                                                          const EdgeInsets.all(
+                                                                              8.0),
+                                                                      child: Text(
+                                                                          element),
+                                                                    )))
+                                                            .toList(),
+                                                    onChanged: (value) {
+                                                      friendsAndFamilyGetController
+                                                          .selectedRelation
+                                                          .value = value!;
+                                                    }),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
+                                    ),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 32.0),
+                                      child: StandardButton(
+                                          text: 'Save Changes',
+                                          onPressed: () {}),
                                     )
                                   ],
                                 ),
