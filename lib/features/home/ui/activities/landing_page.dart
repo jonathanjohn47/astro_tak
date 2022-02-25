@@ -1,6 +1,7 @@
 import 'package:astro_tak/core/app_colors.dart';
 import 'package:astro_tak/features/home/getxcontrollers/landing_page_get_controller.dart';
 import 'package:astro_tak/features/home/ui/activities/landing_page_drawer.dart';
+import 'package:astro_tak/features/home/ui/activities/my_profile_page.dart';
 import 'package:astro_tak/features/home/ui/fragments/ask_question.dart';
 import 'package:astro_tak/widgets/standard_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,9 @@ class LandingPage extends StatelessWidget {
           preferredSize: Size.fromHeight(kToolbarHeight + 12),
           child: StandardAppBar(
             trailing: InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.to(HomePage());
+              },
               child: SizedBox(
                   width: 32,
                   height: 32,

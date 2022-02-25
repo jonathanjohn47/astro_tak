@@ -243,7 +243,7 @@ class AskQuestion extends StatelessWidget {
                             fontWeight: FontWeight.w600));
                   }),
                   SizedBox(
-                    width: Get.width * 0.3,
+                    width: Get.width * 0.1,
                   ),
                   AltButton(
                     text: 'Ask Now',
