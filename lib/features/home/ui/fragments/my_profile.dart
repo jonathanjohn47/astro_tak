@@ -1,7 +1,7 @@
 import 'package:astro_tak/core/app_colors.dart';
 import 'package:astro_tak/features/home/getxcontrollers/home_page_get_controller.dart';
 import 'package:astro_tak/features/home/ui/fragments/basic_profile.dart';
-import 'package:astro_tak/features/home/ui/fragments/friends_and_family.dart';
+import 'package:astro_tak/features/home/ui/activities/friends_and_family.dart';
 import 'package:astro_tak/widgets/no_background_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

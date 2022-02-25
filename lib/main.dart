@@ -1,6 +1,8 @@
 import 'package:astro_tak/core/app_colors.dart';
-import 'package:astro_tak/features/home/ui/activities/home_page.dart';
+import 'package:astro_tak/features/home/ui/activities/landing_page.dart';
+import 'package:astro_tak/features/home/ui/activities/my_profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           // This is the theme of your application.
@@ -27,6 +29,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: AppColors.primaryColor,
           secondaryHeaderColor: AppColors.secondaryColor,
         ),
-        home: const HomePage());
+        home: const LandingPage());
   }
 }

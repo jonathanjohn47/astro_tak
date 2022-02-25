@@ -17,7 +17,7 @@ class FriendsAndFamily extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FriendsAndFamilyGetController friendsAndFamilyGetController =
-        Get.put(FriendsAndFamilyGetController());
+    Get.find<FriendsAndFamilyGetController>();
     return Scaffold(
       body: Column(
         children: [
