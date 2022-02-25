@@ -1,13 +1,15 @@
-import 'package:astro_tak/features/home/model/friends_and_family_model.dart';
+import 'dart:convert';
+
+import 'package:astro_tak/features/home/model/all_relatives.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class FriendsAndFamilyGetController extends GetxController {
   RxBool newProfile = false.obs;
   RxDouble walletBalance = 0.0.obs;
 
-  RxList<FriendsAndFamilyModel> friendsAndFamilyListItems =
-      <FriendsAndFamilyModel>[].obs;
+  RxList<AllRelative> friendsAndFamilyListItems = <AllRelative>[].obs;
   int editingIndex = -1;
 
   //formkey
@@ -39,4 +41,33 @@ class FriendsAndFamilyGetController extends GetxController {
 
   RxList relationList = <String>['Mother', 'Father', 'Brother'].obs;
   RxString selectedRelation = 'Mother'.obs;
+
+  Future<void> getRelatives() async {
+    var headers = {
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4ODA5NzY1MTkxIiwiUm9sZXMiOltdLCJleHAiOjE2NzY0NjE0NzEsImlhdCI6MTY0NDkyNTQ3MX0.EVAhZLNeuKd7e7BstsGW5lYEtggbSfLD_aKqGFLpidgL7UHZTBues0MUQR8sqMD1267V4Y_VheBHpxwKWKA3lQ'
+    };
+    var request = http.Request(
+        'GET', Uri.parse('https://staging-api.astrotak.com/api/relative/all'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      var responseBody = await response.stream.bytesToString();
+      AllRelatives allRelatives =
+          AllRelatives.fromJson(json.decode(responseBody));
+      friendsAndFamilyListItems.value = allRelatives.data.allRelatives;
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  @override
+  void onInit() {
+    print('FriendsAndFamilyGetController onInit');
+    getRelatives();
+    super.onInit();
+  }
 }

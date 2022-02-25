@@ -2,7 +2,11 @@ import 'package:astro_tak/core/app_colors.dart';
 import 'package:astro_tak/core/app_constants.dart';
 import 'package:astro_tak/dialogs/delete_confirmation_dialog.dart';
 import 'package:astro_tak/features/home/getxcontrollers/friends_and_family_get_controller.dart';
-import 'package:astro_tak/features/home/model/friends_and_family_model.dart';
+import 'package:astro_tak/features/home/model/all_relatives.dart';
+import 'package:astro_tak/helpers/date_time_helper.dart';
+import 'package:astro_tak/misc.dart';
+
+//C:\Users\jonat\StudioProjects\astro_tak\lib\widgets\alt_button.dart
 import 'package:astro_tak/widgets/alt_button.dart';
 import 'package:astro_tak/widgets/standard_button.dart';
 import 'package:astro_tak/widgets/standard_icon_button.dart';
@@ -17,7 +21,7 @@ class FriendsAndFamily extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FriendsAndFamilyGetController friendsAndFamilyGetController =
-    Get.find<FriendsAndFamilyGetController>();
+        Get.find<FriendsAndFamilyGetController>();
     return Scaffold(
       body: Column(
         children: [
@@ -126,84 +130,117 @@ class FriendsAndFamily extends StatelessWidget {
                                   ],
                                 );
                               } else {
-                                FriendsAndFamilyModel fandf =
+                                AllRelative fandf =
                                     friendsAndFamilyGetController
                                         .friendsAndFamilyListItems[index - 1];
                                 return Card(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(fandf.name),
-                                          Text(fandf.dateOfBirth),
-                                          Text(fandf.placeOfBirth),
-                                          Text(fandf.relation),
-                                          Row(
-                                            children: [
-                                              StandardIconButton(
-                                                  icon: Icons.edit,
-                                                  onPressed: () {
-                                                    friendsAndFamilyGetController
-                                                            .editingIndex =
-                                                        index - 1;
-                                                    friendsAndFamilyGetController
-                                                        .newProfile
-                                                        .value = true;
-                                                    friendsAndFamilyGetController
-                                                        .nameController
-                                                        .text = fandf.name;
-                                                    friendsAndFamilyGetController
-                                                            .dateController
-                                                            .text =
-                                                        fandf.dateOfBirth;
-                                                    friendsAndFamilyGetController
-                                                            .monthController
-                                                            .text =
-                                                        fandf.monthOfBirth;
-                                                    friendsAndFamilyGetController
-                                                            .yearController
-                                                            .text =
-                                                        fandf.yearOfBirth;
-                                                    friendsAndFamilyGetController
-                                                            .hourController
-                                                            .text =
-                                                        fandf.hourOfBirth;
-                                                    friendsAndFamilyGetController
-                                                            .minuteController
-                                                            .text =
-                                                        fandf.minuteOfBirth;
-                                                    friendsAndFamilyGetController
-                                                        .placeOfBirthController
-                                                        .text = fandf.placeOfBirth;
-                                                    friendsAndFamilyGetController
-                                                        .selectedRelation
-                                                        .value = fandf.relation;
-                                                    friendsAndFamilyGetController
-                                                        .selectedGender
-                                                        .value = fandf.gender;
-                                                  }),
-                                              StandardIconButton(
-                                                  icon: Icons.delete,
-                                                  onPressed: () {
-                                                    showDialog(
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return DeleteConfirmationDialog(
-                                                              onDelete: () {
-                                                                friendsAndFamilyGetController
-                                                                    .friendsAndFamilyListItems
-                                                                    .removeAt(
-                                                                        index -
-                                                                            1);
-                                                              },
-                                                              onCancel: () {});
-                                                        });
-                                                  }),
-                                            ],
-                                          ),
-                                        ]),
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(fandf.fullName),
+                                            SizedBox(
+                                              width: Get.width * 0.02,
+                                            ),
+                                            Text(fandf.dateAndTimeOfBirth
+                                                .dateTimeToString()),
+                                            SizedBox(
+                                              width: Get.width * 0.02,
+                                            ),
+                                            Text(fandf.birthPlace.placeName),
+                                            SizedBox(
+                                              width: Get.width * 0.02,
+                                            ),
+                                            Text(fandf.relation),
+                                            SizedBox(
+                                              width: Get.width * 0.02,
+                                            ),
+                                            Row(
+                                              children: [
+                                                StandardIconButton(
+                                                    icon: Icons.edit,
+                                                    onPressed: () {
+                                                      friendsAndFamilyGetController
+                                                              .editingIndex =
+                                                          index - 1;
+                                                      friendsAndFamilyGetController
+                                                          .newProfile
+                                                          .value = true;
+                                                      friendsAndFamilyGetController
+                                                          .nameController
+                                                          .text = fandf.fullName;
+                                                      friendsAndFamilyGetController
+                                                              .dateController
+                                                              .text =
+                                                          fandf.dateAndTimeOfBirth
+                                                              .dateTimeToString()
+                                                              .getDay()
+                                                              .toString();
+                                                      friendsAndFamilyGetController
+                                                              .monthController
+                                                              .text =
+                                                          fandf.dateAndTimeOfBirth
+                                                              .dateTimeToString()
+                                                              .getMonth()
+                                                              .toString();
+                                                      friendsAndFamilyGetController
+                                                              .yearController
+                                                              .text =
+                                                          fandf.dateAndTimeOfBirth
+                                                              .dateTimeToString()
+                                                              .getYear()
+                                                              .toString();
+                                                      friendsAndFamilyGetController
+                                                              .hourController
+                                                              .text =
+                                                          fandf.dateAndTimeOfBirth
+                                                              .dateTimeToString()
+                                                              .getHour()
+                                                              .toString();
+                                                      friendsAndFamilyGetController
+                                                              .minuteController
+                                                              .text =
+                                                          fandf.dateAndTimeOfBirth
+                                                              .dateTimeToString()
+                                                              .getMinute()
+                                                              .toString();
+                                                      friendsAndFamilyGetController
+                                                              .placeOfBirthController
+                                                              .text =
+                                                          fandf.birthPlace
+                                                              .placeName;
+                                                      friendsAndFamilyGetController
+                                                          .selectedRelation
+                                                          .value = fandf.relation;
+                                                      friendsAndFamilyGetController
+                                                          .selectedGender
+                                                          .value = fandf.gender;
+                                                    }),
+                                                StandardIconButton(
+                                                    icon: Icons.delete,
+                                                    onPressed: () {
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return DeleteConfirmationDialog(
+                                                                onDelete: () {
+                                                                  friendsAndFamilyGetController
+                                                                      .friendsAndFamilyListItems
+                                                                      .removeAt(
+                                                                          index -
+                                                                              1);
+                                                                },
+                                                                onCancel: () {});
+                                                          });
+                                                    }),
+                                              ],
+                                            ),
+                                          ]),
+                                    ),
                                   ),
                                 );
                               }
@@ -659,38 +696,64 @@ class FriendsAndFamily extends StatelessWidget {
                                             if (friendsAndFamilyGetController
                                                 .formKey.currentState!
                                                 .validate()) {
-                                              FriendsAndFamilyModel
-                                                  friendsAndFamilyModel =
-                                                  FriendsAndFamilyModel(
-                                                name:
-                                                    friendsAndFamilyGetController
-                                                        .nameController.text,
-                                                relation:
-                                                    friendsAndFamilyGetController
-                                                        .selectedRelation.value,
-                                                gender:
-                                                    friendsAndFamilyGetController
-                                                        .selectedGender.value,
-                                                placeOfBirth:
-                                                    friendsAndFamilyGetController
-                                                        .placeOfBirthController
-                                                        .text,
-                                                hourOfBirth:
-                                                    friendsAndFamilyGetController
-                                                        .hourController.text,
-                                                yearOfBirth:
-                                                    friendsAndFamilyGetController
-                                                        .yearController.text,
-                                                monthOfBirth:
-                                                    friendsAndFamilyGetController
-                                                        .monthController.text,
-                                                dateOfBirth:
-                                                    friendsAndFamilyGetController
-                                                        .dateController.text,
-                                                minuteOfBirth:
-                                                    friendsAndFamilyGetController
-                                                        .minuteController.text,
-                                              );
+                                              AllRelative friendsAndFamilyModel =
+                                                  AllRelative(
+                                                      uuid: Misc.getUniqueId(),
+                                                      relation: friendsAndFamilyGetController
+                                                          .selectedRelation
+                                                          .value,
+                                                      relationId:
+                                                          friendsAndFamilyGetController.relationList.indexOf(friendsAndFamilyGetController.selectedRelation.value) +
+                                                              1,
+                                                      firstName: friendsAndFamilyGetController
+                                                          .nameController.text
+                                                          .split(' ')[0],
+                                                      middleName: friendsAndFamilyGetController.nameController.text.split(' ').length == 2
+                                                          ? ''
+                                                          : friendsAndFamilyGetController
+                                                              .nameController
+                                                              .text
+                                                              .split(' ')[1],
+                                                      lastName: friendsAndFamilyGetController.nameController.text.split(' ').length == 1
+                                                          ? ''
+                                                          : friendsAndFamilyGetController
+                                                              .nameController
+                                                              .text
+                                                              .split(' ')
+                                                              .last,
+                                                      fullName: friendsAndFamilyGetController.nameController.text,
+                                                      gender: friendsAndFamilyGetController.selectedGender.value,
+                                                      dateAndTimeOfBirth: DateTime(int.parse(friendsAndFamilyGetController.yearController.text), int.parse(friendsAndFamilyGetController.monthController.text), int.parse(friendsAndFamilyGetController.dateController.text), int.parse(friendsAndFamilyGetController.hourController.text), int.parse(friendsAndFamilyGetController.minuteController.text)),
+                                                      birthDetails: BirthDetails(
+                                                        dobYear: int.parse(
+                                                            friendsAndFamilyGetController
+                                                                .yearController
+                                                                .text),
+                                                        dobMonth: int.parse(
+                                                            friendsAndFamilyGetController
+                                                                .monthController
+                                                                .text),
+                                                        dobDay: int.parse(
+                                                            friendsAndFamilyGetController
+                                                                .dateController
+                                                                .text),
+                                                        tobHour: int.parse(
+                                                            friendsAndFamilyGetController
+                                                                .hourController
+                                                                .text),
+                                                        tobMin: int.parse(
+                                                            friendsAndFamilyGetController
+                                                                .minuteController
+                                                                .text),
+                                                        meridiem: int.parse(
+                                                                    friendsAndFamilyGetController
+                                                                        .hourController
+                                                                        .text) >
+                                                                12
+                                                            ? 'PM'
+                                                            : 'AM',
+                                                      ),
+                                                      birthPlace: BirthPlace(placeId: '', placeName: ''));
 
                                               if (friendsAndFamilyGetController
                                                       .editingIndex ==
