@@ -171,40 +171,46 @@ class FriendsAndFamily extends StatelessWidget {
                                                           .newProfile
                                                           .value = true;
                                                       friendsAndFamilyGetController
-                                                          .nameController
-                                                          .text = fandf.fullName;
+                                                              .nameController
+                                                              .text =
+                                                          fandf.fullName;
                                                       friendsAndFamilyGetController
                                                               .dateController
                                                               .text =
-                                                          fandf.dateAndTimeOfBirth
+                                                          fandf
+                                                              .dateAndTimeOfBirth
                                                               .dateTimeToString()
                                                               .getDay()
                                                               .toString();
                                                       friendsAndFamilyGetController
                                                               .monthController
                                                               .text =
-                                                          fandf.dateAndTimeOfBirth
+                                                          fandf
+                                                              .dateAndTimeOfBirth
                                                               .dateTimeToString()
                                                               .getMonth()
                                                               .toString();
                                                       friendsAndFamilyGetController
                                                               .yearController
                                                               .text =
-                                                          fandf.dateAndTimeOfBirth
+                                                          fandf
+                                                              .dateAndTimeOfBirth
                                                               .dateTimeToString()
                                                               .getYear()
                                                               .toString();
                                                       friendsAndFamilyGetController
                                                               .hourController
                                                               .text =
-                                                          fandf.dateAndTimeOfBirth
+                                                          fandf
+                                                              .dateAndTimeOfBirth
                                                               .dateTimeToString()
                                                               .getHour()
                                                               .toString();
                                                       friendsAndFamilyGetController
                                                               .minuteController
                                                               .text =
-                                                          fandf.dateAndTimeOfBirth
+                                                          fandf
+                                                              .dateAndTimeOfBirth
                                                               .dateTimeToString()
                                                               .getMinute()
                                                               .toString();
@@ -214,8 +220,9 @@ class FriendsAndFamily extends StatelessWidget {
                                                           fandf.birthPlace
                                                               .placeName;
                                                       friendsAndFamilyGetController
-                                                          .selectedRelation
-                                                          .value = fandf.relation;
+                                                              .selectedRelation
+                                                              .value =
+                                                          fandf.relation;
                                                       friendsAndFamilyGetController
                                                           .selectedGender
                                                           .value = fandf.gender;
@@ -234,7 +241,8 @@ class FriendsAndFamily extends StatelessWidget {
                                                                           index -
                                                                               1);
                                                                 },
-                                                                onCancel: () {});
+                                                                onCancel:
+                                                                    () {});
                                                           });
                                                     }),
                                               ],
@@ -708,12 +716,12 @@ class FriendsAndFamily extends StatelessWidget {
                                                       firstName: friendsAndFamilyGetController
                                                           .nameController.text
                                                           .split(' ')[0],
-                                                      middleName: friendsAndFamilyGetController.nameController.text.split(' ').length == 2
-                                                          ? ''
-                                                          : friendsAndFamilyGetController
+                                                      middleName: friendsAndFamilyGetController.nameController.text.split(' ').length > 2
+                                                          ? friendsAndFamilyGetController
                                                               .nameController
                                                               .text
-                                                              .split(' ')[1],
+                                                              .split(' ')[1]
+                                                          : '',
                                                       lastName: friendsAndFamilyGetController.nameController.text.split(' ').length == 1
                                                           ? ''
                                                           : friendsAndFamilyGetController
@@ -761,6 +769,13 @@ class FriendsAndFamily extends StatelessWidget {
                                                 friendsAndFamilyGetController
                                                     .friendsAndFamilyListItems
                                                     .add(friendsAndFamilyModel);
+                                                friendsAndFamilyGetController
+                                                    .saveRelatives(
+                                                        friendsAndFamilyModel)
+                                                    .then((value) {
+                                                  friendsAndFamilyGetController
+                                                      .getRelatives();
+                                                });
                                               } else {
                                                 friendsAndFamilyGetController
                                                     .friendsAndFamilyListItems

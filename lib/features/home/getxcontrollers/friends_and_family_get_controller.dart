@@ -36,10 +36,10 @@ class FriendsAndFamilyGetController extends GetxController {
   RxInt hourFilledDigits = 0.obs;
   RxInt minuteFilledDigits = 0.obs;
 
-  RxList genderList = <String>['Male', 'Female'].obs;
-  RxString selectedGender = 'Male'.obs;
+  RxList genderList = <String>['OTHERS', 'FEMALE', 'MALE'].obs;
+  RxString selectedGender = 'OTHERS'.obs;
 
-  RxList relationList = <String>['Mother', 'Father', 'Brother'].obs;
+  RxList relationList = <String>['Mother', 'Father', 'Brother', 'Sister', 'Uncle', 'Father In Law', 'Mother In Law'].obs;
   RxString selectedRelation = 'Mother'.obs;
 
   Future<void> getRelatives() async {
@@ -59,6 +59,27 @@ class FriendsAndFamilyGetController extends GetxController {
       AllRelatives allRelatives =
           AllRelatives.fromJson(json.decode(responseBody));
       friendsAndFamilyListItems.value = allRelatives.data.allRelatives;
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  Future<void> saveRelatives(AllRelative relative) async {
+    var headers = {
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4ODA5NzY1MTkxIiwiUm9sZXMiOltdLCJleHAiOjE2NzY0NjE0NzEsImlhdCI6MTY0NDkyNTQ3MX0.EVAhZLNeuKd7e7BstsGW5lYEtggbSfLD_aKqGFLpidgL7UHZTBues0MUQR8sqMD1267V4Y_VheBHpxwKWKA3lQ',
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request(
+        'POST', Uri.parse('https://staging-api.astrotak.com/api/relative'));
+    print(jsonEncode(relative));
+    request.body = jsonEncode(relative);
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print('success');
     } else {
       print(response.reasonPhrase);
     }
