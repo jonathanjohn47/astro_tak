@@ -315,171 +315,176 @@ class FriendsAndFamily extends StatelessWidget {
                                     SizedBox(
                                       height: Get.height * 0.02,
                                     ),
-                                    Obx(() {
-                                      return Row(
-                                        children: [
-                                          Expanded(
-                                            child: Wrap(
-                                              children: [
-                                                TextEntryField(
-                                                  controller:
-                                                      friendsAndFamilyGetController
-                                                          .dateController,
-                                                  labelText: 'Date',
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  validator: (value) {
-                                                    if (value.isEmpty) {
-                                                      return 'Please enter a date';
-                                                    }
-                                                    return null;
-                                                  },
-                                                  onChanged: (value) {
-                                                    friendsAndFamilyGetController
-                                                        .dateFilledDigits
-                                                        .value = value.length;
-                                                  },
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
+                                    Wrap(
+                                      children: [
+                                        Text('Birth Details'),
+                                        Obx(() {
+                                          return Row(
+                                            children: [
+                                              Expanded(
+                                                child: Wrap(
                                                   children: [
-                                                    Text(
-                                                      "${friendsAndFamilyGetController.dateFilledDigits.value} / ${friendsAndFamilyGetController.dateDigits}",
-                                                      style: TextStyle(
-                                                          color: friendsAndFamilyGetController
-                                                                      .dateFilledDigits
-                                                                      .value <=
-                                                                  friendsAndFamilyGetController
-                                                                      .dateDigits
-                                                              ? Colors.grey
-                                                              : Colors.red,
-                                                          fontWeight: friendsAndFamilyGetController
-                                                                      .dateFilledDigits
-                                                                      .value <=
-                                                                  friendsAndFamilyGetController
-                                                                      .dateDigits
-                                                              ? FontWeight
-                                                                  .normal
-                                                              : FontWeight
-                                                                  .bold),
+                                                    TextEntryField(
+                                                      controller:
+                                                          friendsAndFamilyGetController
+                                                              .dateController,
+                                                      labelText: 'Date',
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      validator: (value) {
+                                                        if (value.isEmpty) {
+                                                          return 'Please enter a date';
+                                                        }
+                                                        return null;
+                                                      },
+                                                      onChanged: (value) {
+                                                        friendsAndFamilyGetController
+                                                            .dateFilledDigits
+                                                            .value = value.length;
+                                                      },
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Text(
+                                                          "${friendsAndFamilyGetController.dateFilledDigits.value} / ${friendsAndFamilyGetController.dateDigits}",
+                                                          style: TextStyle(
+                                                              color: friendsAndFamilyGetController
+                                                                          .dateFilledDigits
+                                                                          .value <=
+                                                                      friendsAndFamilyGetController
+                                                                          .dateDigits
+                                                                  ? Colors.grey
+                                                                  : Colors.red,
+                                                              fontWeight: friendsAndFamilyGetController
+                                                                          .dateFilledDigits
+                                                                          .value <=
+                                                                      friendsAndFamilyGetController
+                                                                          .dateDigits
+                                                                  ? FontWeight
+                                                                      .normal
+                                                                  : FontWeight
+                                                                      .bold),
+                                                        )
+                                                      ],
                                                     )
                                                   ],
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: Get.width * 0.02,
-                                          ),
-                                          Expanded(
-                                            child: Wrap(
-                                              children: [
-                                                TextEntryField(
-                                                  controller:
-                                                      friendsAndFamilyGetController
-                                                          .monthController,
-                                                  labelText: 'Month',
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  validator: (value) {
-                                                    if (value.isEmpty) {
-                                                      return 'Please enter a month';
-                                                    }
-                                                    return null;
-                                                  },
-                                                  onChanged: (value) {
-                                                    friendsAndFamilyGetController
-                                                        .monthFilledDigits
-                                                        .value = value.length;
-                                                  },
                                                 ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
+                                              ),
+                                              SizedBox(
+                                                width: Get.width * 0.02,
+                                              ),
+                                              Expanded(
+                                                child: Wrap(
                                                   children: [
-                                                    Text(
-                                                      "${friendsAndFamilyGetController.monthFilledDigits.value} / ${friendsAndFamilyGetController.monthDigits}",
-                                                      style: TextStyle(
-                                                          color: friendsAndFamilyGetController
-                                                                      .monthFilledDigits
-                                                                      .value <=
-                                                                  friendsAndFamilyGetController
-                                                                      .monthDigits
-                                                              ? Colors.grey
-                                                              : Colors.red,
-                                                          fontWeight: friendsAndFamilyGetController
-                                                                      .monthFilledDigits
-                                                                      .value <=
-                                                                  friendsAndFamilyGetController
-                                                                      .monthDigits
-                                                              ? FontWeight
-                                                                  .normal
-                                                              : FontWeight
-                                                                  .bold),
+                                                    TextEntryField(
+                                                      controller:
+                                                          friendsAndFamilyGetController
+                                                              .monthController,
+                                                      labelText: 'Month',
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      validator: (value) {
+                                                        if (value.isEmpty) {
+                                                          return 'Please enter a month';
+                                                        }
+                                                        return null;
+                                                      },
+                                                      onChanged: (value) {
+                                                        friendsAndFamilyGetController
+                                                            .monthFilledDigits
+                                                            .value = value.length;
+                                                      },
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Text(
+                                                          "${friendsAndFamilyGetController.monthFilledDigits.value} / ${friendsAndFamilyGetController.monthDigits}",
+                                                          style: TextStyle(
+                                                              color: friendsAndFamilyGetController
+                                                                          .monthFilledDigits
+                                                                          .value <=
+                                                                      friendsAndFamilyGetController
+                                                                          .monthDigits
+                                                                  ? Colors.grey
+                                                                  : Colors.red,
+                                                              fontWeight: friendsAndFamilyGetController
+                                                                          .monthFilledDigits
+                                                                          .value <=
+                                                                      friendsAndFamilyGetController
+                                                                          .monthDigits
+                                                                  ? FontWeight
+                                                                      .normal
+                                                                  : FontWeight
+                                                                      .bold),
+                                                        )
+                                                      ],
                                                     )
                                                   ],
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: Get.width * 0.02,
-                                          ),
-                                          Expanded(
-                                            child: Wrap(
-                                              children: [
-                                                TextEntryField(
-                                                  controller:
-                                                      friendsAndFamilyGetController
-                                                          .yearController,
-                                                  labelText: 'Year',
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  validator: (value) {
-                                                    if (value.isEmpty) {
-                                                      return 'Please enter a year';
-                                                    }
-                                                    return null;
-                                                  },
-                                                  onChanged: (value) {
-                                                    friendsAndFamilyGetController
-                                                        .yearFilledDigits
-                                                        .value = value.length;
-                                                  },
                                                 ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
+                                              ),
+                                              SizedBox(
+                                                width: Get.width * 0.02,
+                                              ),
+                                              Expanded(
+                                                child: Wrap(
                                                   children: [
-                                                    Text(
-                                                      "${friendsAndFamilyGetController.yearFilledDigits.value} / ${friendsAndFamilyGetController.yearDigits}",
-                                                      style: TextStyle(
-                                                          color: friendsAndFamilyGetController
-                                                                      .yearFilledDigits
-                                                                      .value <=
-                                                                  friendsAndFamilyGetController
-                                                                      .yearDigits
-                                                              ? Colors.grey
-                                                              : Colors.red,
-                                                          fontWeight: friendsAndFamilyGetController
-                                                                      .yearFilledDigits
-                                                                      .value <=
-                                                                  friendsAndFamilyGetController
-                                                                      .yearDigits
-                                                              ? FontWeight
-                                                                  .normal
-                                                              : FontWeight
-                                                                  .bold),
+                                                    TextEntryField(
+                                                      controller:
+                                                          friendsAndFamilyGetController
+                                                              .yearController,
+                                                      labelText: 'Year',
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      validator: (value) {
+                                                        if (value.isEmpty) {
+                                                          return 'Please enter a year';
+                                                        }
+                                                        return null;
+                                                      },
+                                                      onChanged: (value) {
+                                                        friendsAndFamilyGetController
+                                                            .yearFilledDigits
+                                                            .value = value.length;
+                                                      },
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Text(
+                                                          "${friendsAndFamilyGetController.yearFilledDigits.value} / ${friendsAndFamilyGetController.yearDigits}",
+                                                          style: TextStyle(
+                                                              color: friendsAndFamilyGetController
+                                                                          .yearFilledDigits
+                                                                          .value <=
+                                                                      friendsAndFamilyGetController
+                                                                          .yearDigits
+                                                                  ? Colors.grey
+                                                                  : Colors.red,
+                                                              fontWeight: friendsAndFamilyGetController
+                                                                          .yearFilledDigits
+                                                                          .value <=
+                                                                      friendsAndFamilyGetController
+                                                                          .yearDigits
+                                                                  ? FontWeight
+                                                                      .normal
+                                                                  : FontWeight
+                                                                      .bold),
+                                                        )
+                                                      ],
                                                     )
                                                   ],
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    }),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        }),
+                                      ],
+                                    ),
                                     SizedBox(
                                       height: Get.height * 0.02,
                                     ),
