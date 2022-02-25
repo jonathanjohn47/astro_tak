@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:astro_tak/features/home/model/all_relatives.dart';
+import 'package:astro_tak/features/home/model/location_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -36,6 +37,8 @@ class FriendsAndFamilyGetController extends GetxController {
   RxInt hourFilledDigits = 0.obs;
   RxInt minuteFilledDigits = 0.obs;
 
+  RxString meridian = "AM".obs;
+
   RxList genderList = <String>['OTHERS', 'FEMALE', 'MALE'].obs;
   RxString selectedGender = 'OTHERS'.obs;
 
@@ -46,7 +49,8 @@ class FriendsAndFamilyGetController extends GetxController {
     'Sister',
     'Uncle',
     'Father In Law',
-    'Mother In Law'
+    'Mother In Law',
+    'Spouse',
   ].obs;
   RxString selectedRelation = 'Mother'.obs;
 
@@ -59,20 +63,18 @@ class FriendsAndFamilyGetController extends GetxController {
         'GET', Uri.parse('https://staging-api.astrotak.com/api/relative/all'));
     request.body = '''''';
     request.headers.addAll(headers);
-
     http.StreamedResponse response = await request.send();
-
+    print('Get Relatives Response: ${response}');
     if (response.statusCode == 200) {
       var responseBody = await response.stream.bytesToString();
       AllRelatives allRelatives =
           AllRelatives.fromJson(json.decode(responseBody));
+      allRelatives.data.allRelatives.forEach((element) {});
       friendsAndFamilyListItems.value = allRelatives.data.allRelatives;
-    } else {
-      print(response.reasonPhrase);
-    }
+    } else {}
   }
 
-  Future<void> saveRelatives(AllRelative relative) async {
+  Future<void> saveRelative(AllRelative relative) async {
     var headers = {
       'Authorization':
           'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4ODA5NzY1MTkxIiwiUm9sZXMiOltdLCJleHAiOjE2NzY0NjE0NzEsImlhdCI6MTY0NDkyNTQ3MX0.EVAhZLNeuKd7e7BstsGW5lYEtggbSfLD_aKqGFLpidgL7UHZTBues0MUQR8sqMD1267V4Y_VheBHpxwKWKA3lQ',
@@ -80,17 +82,15 @@ class FriendsAndFamilyGetController extends GetxController {
     };
     var request = http.Request(
         'POST', Uri.parse('https://staging-api.astrotak.com/api/relative'));
-    print(jsonEncode(relative));
+
     request.body = jsonEncode(relative);
+    print('Save Relative Request: ${request.body}');
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-
+    print('Save Relative Response: ${response}');
     if (response.statusCode == 200) {
-      print('success');
-    } else {
-      print(response.reasonPhrase);
-    }
+    } else {}
   }
 
   Future<void> deleteRelative(AllRelative relative) async {
@@ -106,18 +106,61 @@ class FriendsAndFamilyGetController extends GetxController {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-    print(jsonEncode(relative));
-
+    print('Delete Relative Response: ${response}');
     if (response.statusCode == 200) {
-      print('success');
-    } else {
-      print(response.reasonPhrase);
-    }
+    } else {}
+  }
+
+  Future<void> editRelative(AllRelative relative) async {
+    var headers = {
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4ODA5NzY1MTkxIiwiUm9sZXMiOltdLCJleHAiOjE2NzY0NjE0NzEsImlhdCI6MTY0NDkyNTQ3MX0.EVAhZLNeuKd7e7BstsGW5lYEtggbSfLD_aKqGFLpidgL7UHZTBues0MUQR8sqMD1267V4Y_VheBHpxwKWKA3lQ',
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request(
+        'POST',
+        Uri.parse(
+            'https://staging-api.astrotak.com/api/relative/update/${relative.uuid}'));
+    request.body = json.encode(relative);
+    print('Edit Relative request body: ${request.body}');
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    print('Edit Relative response: ${response}');
+    if (response.statusCode == 200) {
+    } else {}
+  }
+
+  Future<String> getLocation(String place) async {
+    var headers = {
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4ODA5NzY1MTkxIiwiUm9sZXMiOltdLCJleHAiOjE2NzY0NjE0NzEsImlhdCI6MTY0NDkyNTQ3MX0.EVAhZLNeuKd7e7BstsGW5lYEtggbSfLD_aKqGFLpidgL7UHZTBues0MUQR8sqMD1267V4Y_VheBHpxwKWKA3lQ',
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            'https://staging-api.astrotak.com/api/location/place?inputPlace=${place.camelCase}'));
+    request.body = json.encode({"inputPlace": place.camelCase});
+    print('Get Location request body: ${request.body}');
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    print('Get Location response: ${response}');
+
+    String locationId = '';
+    if (response.statusCode == 200) {
+      var responseString = await response.stream.bytesToString();
+
+      LocationResponse locationResponse =
+          LocationResponse.fromJson(jsonDecode(responseString));
+      locationId = locationResponse.data[0].placeId;
+    } else {}
+    return locationId;
   }
 
   @override
   void onInit() {
-    print('FriendsAndFamilyGetController onInit');
     getRelatives();
     super.onInit();
   }
