@@ -153,8 +153,8 @@ class FriendsAndFamily extends StatelessWidget {
                                               /*SizedBox(
                                                 width: Get.width * 0.02,
                                               ),*/
-                                              Text(fandf.dateAndTimeOfBirth
-                                                  .getTimeString()),
+                                              Text(
+                                                  "${fandf.dateAndTimeOfBirth.getTwelveHourTime()}"),
                                               /*SizedBox(
                                                 width: Get.width * 0.02,
                                               ),*/

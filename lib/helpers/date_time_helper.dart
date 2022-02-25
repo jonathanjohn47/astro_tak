@@ -1,11 +1,11 @@
 extension DateTimeHelper on DateTime {
   String dateTimeToString() {
-    //convert to 'yyyy-MM-dd HH:mm:ss'
-    return year.toString() +
+    //convert to 'dd-MM-yyyy HH:mm:ss'
+    return day.toString().padLeft(2, '0') +
         '-' +
         month.toString().padLeft(2, '0') +
         '-' +
-        day.toString().padLeft(2, '0') +
+        year.toString() +
         ' ' +
         hour.toString().padLeft(2, '0') +
         ':' +
@@ -14,11 +14,11 @@ extension DateTimeHelper on DateTime {
 
   String getDateString() {
     //convert to 'yyyy-MM-dd'
-    return year.toString() +
+    return day.toString().padLeft(2, '0') +
         '-' +
         month.toString().padLeft(2, '0') +
         '-' +
-        day.toString().padLeft(2, '0');
+        year.toString();
   }
 
   String getTimeString() {
@@ -26,6 +26,20 @@ extension DateTimeHelper on DateTime {
     return hour.toString().padLeft(2, '0') +
         ':' +
         minute.toString().padLeft(2, '0');
+  }
+
+  String getTwelveHourTime() {
+    String hour = this.hour.toString();
+    String minute = this.minute.toString();
+    String ampm = 'AM';
+    if (this.hour > 12) {
+      hour = (this.hour - 12).toString();
+      ampm = 'PM';
+    }
+    if (this.hour == 0) {
+      hour = '12';
+    }
+    return hour.padLeft(2, '0') + ':' + minute.padLeft(2, '0') + ' ' + ampm;
   }
 
   String getMeridiem() {

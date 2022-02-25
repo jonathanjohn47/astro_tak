@@ -42,7 +42,7 @@ class FriendsAndFamilyGetController extends GetxController {
   RxList genderList = <String>['OTHERS', 'FEMALE', 'MALE'].obs;
   RxString selectedGender = 'OTHERS'.obs;
 
-  RxList relationList = <String>[
+  RxList<String> relationList = <String>[
     'Mother',
     'Father',
     'Brother',
@@ -69,8 +69,19 @@ class FriendsAndFamilyGetController extends GetxController {
       var responseBody = await response.stream.bytesToString();
       AllRelatives allRelatives =
           AllRelatives.fromJson(json.decode(responseBody));
-      allRelatives.data.allRelatives.forEach((element) {});
+      for (var element in allRelatives.data.allRelatives) {}
       friendsAndFamilyListItems.value = allRelatives.data.allRelatives;
+      relationList.value =
+          allRelatives.data.allRelatives.map((e) => e.relation).toList();
+      List<String> emptyList = [];
+      for (var element in relationList) {
+        if (!emptyList.contains(element)) {
+          emptyList.add(element);
+        }
+      }
+      relationList.value = emptyList;
+
+      selectedRelation.value = relationList.value[0];
     } else {}
   }
 
