@@ -236,10 +236,11 @@ class FriendsAndFamily extends StatelessWidget {
                                                             return DeleteConfirmationDialog(
                                                                 onDelete: () {
                                                                   friendsAndFamilyGetController
-                                                                      .friendsAndFamilyListItems
-                                                                      .removeAt(
-                                                                          index -
-                                                                              1);
+                                                                      .deleteRelative(
+                                                                          fandf)
+                                                                      .then((value) =>
+                                                                          friendsAndFamilyGetController
+                                                                              .getRelatives());
                                                                 },
                                                                 onCancel:
                                                                     () {});
