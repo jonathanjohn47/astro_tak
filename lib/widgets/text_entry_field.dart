@@ -11,6 +11,7 @@ class TextEntryField extends StatelessWidget {
   final Function(String)? validator;
   final String? validatorText;
   final Function(String)? onChanged;
+  final int? maxLength;
 
   const TextEntryField(
       {Key? key,
@@ -22,7 +23,7 @@ class TextEntryField extends StatelessWidget {
       this.suffixIcon,
       this.validator,
       this.validatorText,
-      this.onChanged})
+      this.onChanged, this.maxLength})
       : super(key: key);
 
   @override
@@ -31,10 +32,12 @@ class TextEntryField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       obscureText: obscureText ?? false,
+      maxLines: maxLength,
       decoration: InputDecoration(
         labelText: labelText,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
+        isCollapsed: false,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.borderRadius),
         ),
