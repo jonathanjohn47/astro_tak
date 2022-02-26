@@ -54,7 +54,10 @@ class FriendsAndFamilyGetController extends GetxController {
   ].obs;
   RxString selectedRelation = 'Mother'.obs;
 
+  RxBool showLoader = false.obs;
+
   Future<void> getRelatives() async {
+    showLoader.value = true;
     var headers = {
       'Authorization':
           'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4ODA5NzY1MTkxIiwiUm9sZXMiOltdLCJleHAiOjE2NzY0NjE0NzEsImlhdCI6MTY0NDkyNTQ3MX0.EVAhZLNeuKd7e7BstsGW5lYEtggbSfLD_aKqGFLpidgL7UHZTBues0MUQR8sqMD1267V4Y_VheBHpxwKWKA3lQ'
@@ -88,7 +91,10 @@ class FriendsAndFamilyGetController extends GetxController {
       relationList.value = emptyList;
 
       selectedRelation.value = relationList.value[0];
-    } else {}
+    } else {
+      throw Exception('Failed to get relatives');
+    }
+    showLoader.value = false;
   }
 
   Future<void> saveRelative(AllRelative relative) async {
@@ -107,7 +113,9 @@ class FriendsAndFamilyGetController extends GetxController {
     http.StreamedResponse response = await request.send();
     print('Save Relative Response: ${response}');
     if (response.statusCode == 200) {
-    } else {}
+    } else {
+      throw Exception('Failed to save relative');
+    }
   }
 
   Future<void> deleteRelative(AllRelative relative) async {
@@ -125,7 +133,9 @@ class FriendsAndFamilyGetController extends GetxController {
     http.StreamedResponse response = await request.send();
     print('Delete Relative Response: ${response}');
     if (response.statusCode == 200) {
-    } else {}
+    } else {
+      throw Exception('Failed to delete relative');
+    }
   }
 
   Future<void> editRelative(AllRelative relative) async {
@@ -145,7 +155,9 @@ class FriendsAndFamilyGetController extends GetxController {
     http.StreamedResponse response = await request.send();
     print('Edit Relative response: ${response}');
     if (response.statusCode == 200) {
-    } else {}
+    } else {
+      throw Exception('Failed to edit relative');
+    }
   }
 
   Future<String> getLocation(String place) async {
@@ -172,7 +184,9 @@ class FriendsAndFamilyGetController extends GetxController {
       LocationResponse locationResponse =
           LocationResponse.fromJson(jsonDecode(responseString));
       locationId = locationResponse.data[0].placeId;
-    } else {}
+    } else {
+      throw Exception('Failed to get location');
+    }
     return locationId;
   }
 
